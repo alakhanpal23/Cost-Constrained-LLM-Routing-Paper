@@ -1,6 +1,6 @@
 # Cost-Constrained LLM Routing with a Bounded Model Pool
 
-**IND ENG 164 course research paper**
+**Technical summary of the [IND ENG 164 course paper](paper.pdf)**
 
 Arjun Lakhanpal
 
