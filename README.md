@@ -4,7 +4,7 @@
 
 How should a system choose a small set of language models, then assign prompts to those models while meeting quality targets at the lowest measured cost? This project formulates that question as a mixed-integer optimization problem in Pyomo. It explores model-pool size, minimum quality, benchmark-specific floors, score uncertainty, and changes in the prompt mix.
 
-**[Read the full paper (PDF)](paper.pdf)** · [Technical summary and limitations](PAPER.md) · [Explore the notebook](IND_ENG_Final_Project.ipynb)
+**[Read the full paper (PDF)](paper.pdf)** · [Technical summary and limitations](PAPER.md) · [Explore the notebook](IND_ENG_Final_Project.ipynb) · [Next evaluations](EVALS.md)
 
 The [15-page paper](paper.pdf), titled *Cost-Aware LLM Routing for AI Coding Assistants: A Two-Stage Stochastic and Robust Optimization Approach*, is also maintained in [Overleaf](https://www.overleaf.com/project/69fa6a312464f606f451d7ce) (project access is limited to collaborators). The PDF here is the public reading copy.
 
