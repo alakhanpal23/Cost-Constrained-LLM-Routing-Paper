@@ -1,13 +1,21 @@
-# Model routing optimization notebook
+# Cost-Constrained LLM Routing with a Bounded Model Pool
 
-This course project uses Pyomo to select a small pool of language models and route prompts to them under quality and cost constraints. The notebook reads RouterBench-style rows with `dataset`, `prompt_id`, `model`, `score`, and `cost` columns, then formulates an assignment and model-selection problem.
+**IND ENG 164 · course research paper and optimization notebook**
 
-## Run
+How should a system choose a small set of language models, then assign prompts to those models while meeting quality targets at the lowest measured cost? This project formulates that question as a mixed-integer optimization problem in Pyomo. It explores model-pool size, minimum quality, benchmark-specific floors, score uncertainty, and changes in the prompt mix.
 
-Open `IND_ENG_Final_Project.ipynb` in Jupyter or Google Colab. Provide a local `routerbench.csv` when prompted. The dataset is not included in this repository.
+**[Read the paper](PAPER.md)** · **[Explore the notebook](IND_ENG_Final_Project.ipynb)**
 
-The notebook uses pandas, NumPy, Matplotlib, Pyomo, and the HiGHS solver through `highspy`; it can fall back to GLPK when available. Review the notebook's assumptions and input validation before applying its results to another dataset.
+The saved notebook run contains 240 prompts, 33 candidate models, and four benchmark groups. With at most five selected models, a minimum average score of 0.80, and a 0.70 floor for each group, its in-sample solution scores **0.8125** at **0 recorded cost**. That zero comes from the input CSV's cost values; it is **not** a claim that serving those models is free.
 
-## Scope
+## What the work demonstrates
 
-This is a research and coursework notebook. Costs and quality scores come from the supplied CSV, so results depend on that dataset and the selected constraints. They are not live model pricing or a current benchmark claim.
+- Binary decisions for model selection and prompt assignment under a pool-size limit.
+- An explicit cost–quality frontier and sensitivity checks for score margins and prompt distribution.
+- A reproducible optimization *method*, with the original input data and validation limits clearly disclosed.
+
+## Reproduce the analysis
+
+Open the notebook in Jupyter or Google Colab and provide a local `routerbench.csv` with `dataset`, `prompt_id`, `model`, `score`, and `cost` columns. The CSV used for the saved run is **not included**, so the reported numbers cannot be independently regenerated from this repository alone. The notebook uses pandas, NumPy, Matplotlib, Pyomo, and HiGHS via `highspy` (with a GLPK fallback).
+
+The optimizer sees each candidate model's outcome on each prompt before assigning that prompt. The reported score is therefore an **in-sample oracle result**, not a measured routing policy for unseen prompts. See the [paper's limitations](PAPER.md#limitations-and-next-steps) before using the results for deployment or comparison with a learned router.
